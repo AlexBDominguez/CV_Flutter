@@ -70,17 +70,17 @@ var educacion = [
 
 var tecnologias = [
   {'nombre': 'Java', 'nivel': 0.75},
-  {'nombre': 'Spring Boot', 'nivel': 0.30},
-  {'nombre': 'JavaScript', 'nivel': 0.30},
-  {'nombre': 'TypeScript', 'nivel': 0.30},
-  {'nombre': 'Angular', 'nivel': 0.30},
-  {'nombre': 'HTML/CSS', 'nivel': 0.85},
-  {'nombre': 'Flutter', 'nivel': 0.30},
-  {'nombre': 'Dart', 'nivel': 0.30},
+  {'nombre': 'Spring Boot', 'nivel': 0.15},
+  {'nombre': 'JavaScript', 'nivel': 0.10},
+  {'nombre': 'TypeScript', 'nivel': 0.10},
+  {'nombre': 'Angular', 'nivel': 0.10},
+  {'nombre': 'HTML/CSS', 'nivel': 0.65},
+  {'nombre': 'Flutter', 'nivel': 0.10},
+  {'nombre': 'Dart', 'nivel': 0.10},
   {'nombre': 'Kotlin', 'nivel': 0.10},
   {'nombre': 'Jetpack Compose', 'nivel': 0.05},
   {'nombre': 'SQL', 'nivel': 0.75},
-  {'nombre': 'GitHub', 'nivel': 0.80},
+  {'nombre': 'GitHub', 'nivel': 0.70},
 ];
 
 class Principal extends StatefulWidget {
