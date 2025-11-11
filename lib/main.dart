@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'widgets/barra_progreso.dart'; 
+import 'widgets/barra_progreso.dart';
 
 void main() {
   runApp(const MaterialApp(home: HomePage()));
@@ -94,9 +94,7 @@ class _PrincipalState extends State<Principal> {
   String estadoSeleccionado = 'Disponible';
 
   Color get colorEstado {
-    return estadoSeleccionado == 'Disponible'
-        ? Colors.green
-        : Colors.red;
+    return estadoSeleccionado == 'Disponible' ? Colors.green : Colors.red;
   }
 
   IconData get iconoEstado {
@@ -119,18 +117,25 @@ class _PrincipalState extends State<Principal> {
             child: Column(
               children: [
                 Stack(
-                  alignment: Alignment.bottomRight, 
+                  alignment: Alignment.bottomRight,
                   children: [
                     const CircleAvatar(
                       radius: 60,
-                      backgroundImage: AssetImage('assets/avatar.jpg'),
+                      backgroundImage: AssetImage('assets/avatar.png'),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 5, right: 5),
-                      child: Icon(
-                        iconoEstado,
-                        color: colorEstado,
-                        size: 35.0,
+                      //Contenedor para el fondo blanco del icono
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
+                        child: Icon(
+                          iconoEstado,
+                          color: colorEstado,
+                          size: 35.0,
+                        ),
                       ),
                     ),
                   ],
@@ -155,20 +160,36 @@ class _PrincipalState extends State<Principal> {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 12),
-                DropdownButton<String>(
-                  value: estadoSeleccionado,
-                  items: const [
-                    DropdownMenuItem(
-                      value: 'Disponible',
-                      child: Text('Buscando Trabajo'),
-                    ),
-                    DropdownMenuItem(value: 'Ocupado', child: Text('Ocupado')),
-                  ],
-                  onChanged: (nuevoValor) {
-                    setState(() {
-                      estadoSeleccionado = nuevoValor!;
-                    });
-                  },
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color.fromARGB(255, 217, 255, 250),
+                    border: Border.all(color: Colors.grey),
+                  ),
+                  width: 200,
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: DropdownButton<String>(
+                    dropdownColor: const Color.fromARGB(255, 217, 255, 250),
+                    value: estadoSeleccionado,
+                    isExpanded: true,
+                    underline: const SizedBox(),
+                    icon: const Icon(Icons.arrow_drop_down, size: 30),
+                    items: const [
+                      DropdownMenuItem(
+                        value: 'Disponible',
+                        child: Text('Buscando Trabajo'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'Ocupado',
+                        child: Text('Ocupado'),
+                      ),
+                    ],
+                    onChanged: (nuevoValor) {
+                      setState(() {
+                        estadoSeleccionado = nuevoValor!;
+                      });
+                    },
+                  ),
                 ),
               ],
             ),
@@ -212,11 +233,21 @@ class Experiencia extends StatelessWidget {
               final exp = experiencia[index];
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4.0),
-                child: Text(
-                  '• ${exp['puesto']} (${exp['empresa']})',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Color.fromARGB(179, 0, 0, 0),
+                //RichText para poder poner en negrita
+                child: RichText(
+                  text: TextSpan(
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Color.fromARGB(179, 0, 0, 0),
+                    ),
+                    //Colección de tipo TextSpan para mezclar estilos
+                    children: <TextSpan>[
+                      TextSpan(text: '• ${exp['puesto']} - '),
+                      TextSpan(
+                        text: exp['empresa'],
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
                 ),
               );
@@ -261,11 +292,20 @@ class Educacion extends StatelessWidget {
               final edu = educacion[index];
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4.0),
-                child: Text(
-                  '• ${edu['titulo']} (${edu['empresa']})',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Color.fromARGB(179, 0, 0, 0),
+                child: RichText(
+                  text: TextSpan(
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Color.fromARGB(179, 0, 0, 0),
+                    ),
+                    //Colección de tipo TextSpan para mezclar estilos
+                    children: <TextSpan>[
+                      TextSpan(text: '• ${edu['titulo']} - '),
+                      TextSpan(
+                        text: edu['empresa'],
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
                 ),
               );
